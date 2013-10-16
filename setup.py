@@ -11,6 +11,9 @@ import sys
 import os
 from distutils.core import setup
 import glob
+from subprocess import Popen
+
+VERSIONFILE="VERSION"
 
 def get_version():
     """Returns a version for the package, based on git-describe, or in the
@@ -38,7 +41,7 @@ def get_data_files():
     return l
 
 setup(name="aquilon-build-xml",
-      version=version()
+      version=get_version(),
       description="Custom build.xml files for using different versions of the Pan compiler",
       long_description="""The build.xml shipped with the Aquilon RPM is specific to Morgan Stanley.
 
