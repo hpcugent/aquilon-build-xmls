@@ -12,8 +12,23 @@ import os
 from distutils.core import setup
 import glob
 
-def get_data_files():
+def get_version():
+    """Returns a version for the package, based on git-describe, or in the
+    VERSION file."""
+    try:
+        with open(VERSIONFILE) as f:
+            return f.readline().strip()
+    except IOError:
+        with open(VERSIONFILE, "w") as f:
+            p = Popen("git describe".split(), stdout=f)
+            if p.wait() == 0:
+                return get_version()
+            else:
+                raise
 
+def get_data_files():
+    """Appends all the available build.xml files to the list that will be
+    passed as data_files"""
     l = []
     for d, v, f in os.walk("build-xmls"):
         print d, v, f
@@ -23,7 +38,7 @@ def get_data_files():
     return l
 
 setup(name="aquilon-build-xml",
-      version="1.0.0",
+      version=version()
       description="Custom build.xml files for using different versions of the Pan compiler",
       long_description="""The build.xml shipped with the Aquilon RPM is specific to Morgan Stanley.
 
