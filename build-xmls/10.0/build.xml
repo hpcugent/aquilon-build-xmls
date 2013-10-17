@@ -127,12 +127,9 @@
                       checkDependencies="true"
                       logging="${pan.logging}"
                       debugNsInclude="${panc.debug.include}"
-                      debugNsExclude="${panc.debug.exclude}"
-                      forceBuild="${force.build}">
+                      debugNsExclude="${panc.debug.exclude}" >
                     <path refid="pan.objectloadpath" />
-		    <fileset refid="source.fileset" dir="${source.profiles}"
-                             includes="${source.includes}">
-                    </fileset>
+		    <fileset refid="source.fileset"/>
 		</panc>
 		<!-- Cache the valid profile in the global pool. -->
 		<copy todir="${global.profiles}" preservelastmodified="true" overwrite="${force.build}">
