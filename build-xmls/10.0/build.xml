@@ -48,10 +48,11 @@
 	<!-- web/htdocs/profiles = compiled profiles to be served to clients -->
 	<property name="distributed.profiles" location="${basedir}/web/htdocs/profiles" />
 
-	<!-- Profiles will have a .gz suffix if gzip output is requested. -->
-	<condition property="profile.suffix" value=".xml.gz" else=".xml">
-		<istrue value="${gzip.output}" />
-	</condition>
+
+        <property name="site.secret" location="${basedir}/secret"/>
+	<!-- Profiles will have a .gz suffix if gzip output is
+             requested. -->
+        <property name="profile.suffix" value=".json.gz"/>
 
 	<!--
 	Note that the old 'deps' directory was only needed for the
@@ -69,6 +70,7 @@
 		<pathelement location="${swrep}" />
 		<pathelement location="${source.profiles}" />
 		<pathelement location="${global.profiles}" />
+                <pathelement location="${site.secret}"/>
 	</path>
 
 	<path id="pan.clusterloadpath">
@@ -87,7 +89,7 @@
 		<var name="delete.dep.includes" value="" />
 		<for list="${object.profile}" delimiter=" " param="profile">
 			<sequential>
-				<var name="delete.dep.includes" value="${compiled.includes} @{profile}.dep @{profile}.xml.dep" />
+				<var name="delete.dep.includes" value="${compiled.includes} @{profile}.dep @{profile}.dep" />
 			</sequential>
 		</for>
 		<delete failonerror="false">
