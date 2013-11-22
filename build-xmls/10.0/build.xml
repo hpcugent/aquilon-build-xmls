@@ -46,7 +46,7 @@
 	<!-- build/xml/$domain/* = (pan deps and pan output xml files) -->
 	<property name="compiled.profiles" location="${basedir}/build/${domain}" />
 	<!-- web/htdocs/profiles = compiled profiles to be served to clients -->
-	<property name="distributed.profiles" location="${basedir}/web/htdocs/profiles" />
+	<property name="distributed.profiles" location="/var/www/https/profiles"/>
 
 
         <property name="site.secret" location="${basedir}/secret"/>
